@@ -21,7 +21,7 @@ namespace BookLibrary.Repositories
             return user;
         }
 
-        public List<User> GetAll() 
+        public List<User> GetAll()
         {
             List<User> users;
 
@@ -31,6 +31,19 @@ namespace BookLibrary.Repositories
             }
 
             return users;
+        }
+
+        public int Add(User user)
+        {
+            int resultAdd = 0;
+
+            using (var dbContext = new AppContext())
+            {
+                dbContext.Users.Add(user);
+                resultAdd = dbContext.SaveChanges();
+            }
+
+            return resultAdd;
         }
     }
 }
