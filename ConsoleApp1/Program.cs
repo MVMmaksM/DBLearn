@@ -13,7 +13,7 @@ namespace ConsoleApp1
 
                 db.Users.Add(user1);
                 db.Users.Add(user2);
-                db.SaveChanges();
+                db.SaveChanges();               
             }
         }
     }
