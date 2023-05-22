@@ -42,7 +42,7 @@ namespace BookLibrary
                 //userRepository.Delete(userById);
 
                 userRepository.UpdateNameById(3, "Evgeniy");
-                Console.WriteLine(userRepository.IsEqualBook("Война и не война"));
+                Console.WriteLine(userRepository.GetCountBook("Iva"));
             }
         }
     }

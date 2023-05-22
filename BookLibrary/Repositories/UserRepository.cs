@@ -66,13 +66,13 @@ namespace BookLibrary.Repositories
             }
         }     
 
-        public int GetCountBook(string nameUser)
+        public int? GetCountBook(string nameUser)
         {
-            int countBook = 0;
+            int? countBook = 0;
 
             using (var dbcontext = new AppContext())
             {
-                countBook = dbcontext.Users.Where(u => u.Name.Equals(nameUser)).FirstOrDefault().Books.Count;
+                countBook = dbcontext.Users.Include(u=>u.Books).Where(u => u.Name.Equals(nameUser)).FirstOrDefault()?.Books.Count;
             }
 
             return countBook;
