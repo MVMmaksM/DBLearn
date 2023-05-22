@@ -116,7 +116,7 @@ namespace BookLibrary.Repositories
             return isEqualBook;
         }
 
-        public Book GetHightYearBook() 
+        public Book GetMaxYearBook() 
         {
             Book book = new Book();
            
@@ -127,6 +127,18 @@ namespace BookLibrary.Repositories
             }
 
             return book;
+        }
+
+        public List<Book> GetAllAscTitle() 
+        {
+            List<Book> books = new List<Book>();
+
+            using (var dbcontext = new AppContext())
+            {
+                books = dbcontext.Books.OrderBy(b => b.Title).ToList();
+            }
+
+            return books;
         }
     }
 }
