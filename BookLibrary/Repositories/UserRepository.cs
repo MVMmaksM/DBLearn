@@ -45,5 +45,14 @@ namespace BookLibrary.Repositories
 
             return resultAdd;
         }
+
+        public void Delete(User user) 
+        {
+            using (var dbContext = new AppContext())
+            {
+                dbContext.Remove(user);
+                dbContext.SaveChanges();
+            }
+        }
     }
 }
