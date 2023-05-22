@@ -50,7 +50,7 @@ namespace BookLibrary.Repositories
         {
             using (var dbContext = new AppContext())
             {
-                dbContext.Remove(user);
+                dbContext.Users.Remove(user);
                 dbContext.SaveChanges();
             }
         }
