@@ -90,5 +90,17 @@ namespace BookLibrary.Repositories
 
             return countBook;
         }
+
+        public int GetCountByAuthor(string genre)
+        {
+            int countBook = 0;
+
+            using (var dbcontext = new AppContext())
+            {
+                countBook = countBook = dbcontext.Books.Include(b => b.Genre).Where(b => b.Genre.Equals(genre)).Count();
+            }
+
+            return countBook;
+        }
     }
 }
