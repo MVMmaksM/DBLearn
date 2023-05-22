@@ -17,6 +17,7 @@ namespace BookLibrary
 
         public AppContext()
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
