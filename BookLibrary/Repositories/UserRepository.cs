@@ -20,5 +20,17 @@ namespace BookLibrary.Repositories
 
             return user;
         }
+
+        public List<User> GetAll() 
+        {
+            List<User> users;
+
+            using (var dbContext = new AppContext())
+            {
+                users = dbContext.Users.ToList();
+            }
+
+            return users;
+        }
     }
 }
