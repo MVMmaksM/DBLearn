@@ -34,17 +34,13 @@ namespace BookLibrary.Repositories
             return users;
         }
 
-        public int AddUser(User user)
-        {
-            int resultAdd = 0;
-
+        public void AddUser(User user)
+        {         
             using (var dbContext = new AppContext())
             {
                 dbContext.Users.Add(user);
-                resultAdd = dbContext.SaveChanges();
+                dbContext.SaveChanges();
             }
-
-            return resultAdd;
         }
 
         public void Delete(User user)

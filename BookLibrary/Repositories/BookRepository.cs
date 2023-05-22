@@ -36,17 +36,13 @@ namespace BookLibrary.Repositories
             return books;
         }
 
-        public int Add(Book book)
-        {
-            int resultAdd = 0;
-
+        public void Add(Book book)
+        {          
             using (var dbContext = new AppContext())
             {
                 dbContext.Books.Add(book);
-                resultAdd = dbContext.SaveChanges();
+                dbContext.SaveChanges();
             }
-
-            return resultAdd;
         }
 
         public void Delete(Book book)
