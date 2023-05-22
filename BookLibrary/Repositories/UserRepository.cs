@@ -34,7 +34,7 @@ namespace BookLibrary.Repositories
             return users;
         }
 
-        public int Add(User user)
+        public int AddUser(User user)
         {
             int resultAdd = 0;
 
@@ -64,19 +64,7 @@ namespace BookLibrary.Repositories
                 userUpdate.Name = nameUpdate;
                 dbContext.SaveChanges();
             }
-        }
-
-        public bool IsEqualBook(string titleBook)
-        {
-            bool isEqualBook = false;
-
-            using (var dbcontext = new AppContext())
-            {
-                isEqualBook = dbcontext.Users.Include(u => u.Books.Where(b => b.Title.Equals(titleBook))).Count() > 0;
-            }
-
-            return isEqualBook;
-        }
+        }     
 
         public int GetCountBook(string nameUser)
         {

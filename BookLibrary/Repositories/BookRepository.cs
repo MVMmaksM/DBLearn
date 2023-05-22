@@ -152,5 +152,17 @@ namespace BookLibrary.Repositories
 
             return books;
         }
+
+        public bool IsEqualBook(string titleBook)
+        {
+            bool isEqualBook = false;
+
+            using (var dbcontext = new AppContext())
+            {
+                isEqualBook = dbcontext.Books.Where(b => b.Title == titleBook && b.UserId != null).Count() > 0;
+            }
+
+            return isEqualBook;
+        }
     }
 }

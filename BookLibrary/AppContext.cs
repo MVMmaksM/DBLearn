@@ -18,8 +18,7 @@ namespace BookLibrary
         public DbSet<Genre> Genres { get; set; }
 
         public AppContext()
-        {
-            Database.EnsureDeleted();
+        {          
             Database.EnsureCreated();
         }
 
