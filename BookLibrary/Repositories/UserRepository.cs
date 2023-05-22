@@ -46,11 +46,21 @@ namespace BookLibrary.Repositories
             return resultAdd;
         }
 
-        public void Delete(User user) 
+        public void Delete(User user)
         {
             using (var dbContext = new AppContext())
             {
                 dbContext.Remove(user);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void UpdateNameById(int id, string nameUpdate) 
+        {
+            using (var dbContext = new AppContext())
+            {
+                var userUpdate = GetById(id);
+                userUpdate.Name = nameUpdate;
                 dbContext.SaveChanges();
             }
         }
