@@ -1,9 +1,11 @@
 ﻿using BookLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BookLibrary.Repositories
 {
@@ -23,7 +25,7 @@ namespace BookLibrary.Repositories
 
         public List<Book> GetAll()
         {
-            List<Book> books;
+            List<Book> books = new List<Book>();
 
             using (var dbContext = new AppContext())
             {
@@ -63,6 +65,30 @@ namespace BookLibrary.Repositories
                 bookUpdate.Year = yearUpdate;
                 dbContext.SaveChanges();
             }
+        }
+
+        public List<Book> GetBooks(int lowYear, int highYear, string genre)
+        {
+            List<Book> books = new List<Book>();
+
+            using (var dbcontext = new AppContext())
+            {
+                books = dbcontext.Books.Include(b => b.Genre).Where(b => b.Genre.Name.Equals(genre)).Where(b => b.Year >= lowYear && b.Year <= highYear).ToList();
+            }
+
+            return books;
+        }
+
+        public int GetCountByAuthor(string author)
+        {
+            int countBook = 0;
+
+            using (var dbcontext = new AppContext())
+            {
+                countBook = countBook = dbcontext.Books.Include(b => b.Author).Where(b => b.Author.FirstName.Equals(author)).Count();
+            }
+
+            return countBook;
         }
     }
 }
