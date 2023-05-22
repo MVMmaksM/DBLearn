@@ -1,4 +1,5 @@
 ﻿using BookLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace BookLibrary.Repositories
             }
         }
 
-        public void UpdateNameById(int id, string nameUpdate) 
+        public void UpdateNameById(int id, string nameUpdate)
         {
             using (var dbContext = new AppContext())
             {
@@ -63,6 +64,30 @@ namespace BookLibrary.Repositories
                 userUpdate.Name = nameUpdate;
                 dbContext.SaveChanges();
             }
+        }
+
+        public bool IsEqualBook(string titleBook)
+        {
+            bool isEqualBook = false;
+
+            using (var dbcontext = new AppContext())
+            {
+                isEqualBook = dbcontext.Users.Include(u => u.Books.Where(b => b.Title.Equals(titleBook))).Count() > 0;
+            }
+
+            return isEqualBook;
+        }
+
+        public int GetCountBook(string nameUser)
+        {
+            int countBook = 0;
+
+            using (var dbcontext = new AppContext())
+            {
+                countBook = dbcontext.Users.Where(u => u.Name.Equals(nameUser)).FirstOrDefault().Books.Count;
+            }
+
+            return countBook;
         }
     }
 }
