@@ -73,25 +73,25 @@ namespace BookLibrary.Repositories
 
             using (var dbcontext = new AppContext())
             {
-                books = dbcontext.Books.Include(b => b.Genre).Where(b => b.Genre.Name.Equals(genre)).Where(b => b.Year >= lowYear && b.Year <= highYear).ToList();
+                books = dbcontext.Books.Include(b => b.Genre).Where(b => b.Genre.Name.Equals(genre) && (b.Year >= lowYear && b.Year <= highYear)).ToList();
             }
 
             return books;
         }
 
-        public int GetCountByAuthor(string author)
+        public int GetCountByAuthor(string firstNameAuthor)
         {
             int countBook = 0;
 
             using (var dbcontext = new AppContext())
             {
-                countBook = countBook = dbcontext.Books.Include(b => b.Author).Where(b => b.Author.FirstName.Equals(author)).Count();
+                countBook = countBook = dbcontext.Books.Include(b => b.Author).Where(b => b.Author.FirstName.Equals(firstNameAuthor)).Count();
             }
 
             return countBook;
         }
 
-        public int GetCountByAuthor(string genre)
+        public int GetCountByGenre(string genre)
         {
             int countBook = 0;
 
@@ -102,5 +102,17 @@ namespace BookLibrary.Repositories
 
             return countBook;
         }
+
+        public bool IsEqualBook(string firstNameAuthor, string titleBook) 
+        {
+            bool isEqualBook = false;
+
+            using (var dbcontext = new AppContext())
+            {
+                isEqualBook = dbcontext.Books.Include(b => b.Author).Where(b => b.Author.FirstName.Equals(firstNameAuthor) && b.Title.Equals(titleBook)).Count()>0;
+            }
+
+            return isEqualBook;
+        }        
     }
 }
