@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.Models
 {
-    public class Author
+    public class Genre
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime BirthDay { get; set; }
+        public string Name { get; set; }
         public List<Book> Books { get; set; } = new List<Book>();
     }
 }

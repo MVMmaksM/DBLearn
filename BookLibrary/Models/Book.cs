@@ -12,8 +12,8 @@ namespace BookLibrary.Models
         public string Title { get; set; }
         public int Year { get; set; }
         public int UserId { get; set; }
-        public int authorId { get; set; }
-        public int genreId { get; set; }
+        public int AuthorId { get; set; }
+        public int GenreId { get; set; }
         public User User { get; set; }
         public Author Author { get; set; }
         public Genre Genre { get; set; }
