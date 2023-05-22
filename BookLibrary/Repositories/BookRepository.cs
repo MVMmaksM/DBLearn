@@ -140,5 +140,17 @@ namespace BookLibrary.Repositories
 
             return books;
         }
+
+        public List<Book> GetAllDescYear()
+        {
+            List<Book> books = new List<Book>();
+
+            using (var dbcontext = new AppContext())
+            {
+                books = dbcontext.Books.OrderByDescending(b => b.Year).ToList();
+            }
+
+            return books;
+        }
     }
 }
