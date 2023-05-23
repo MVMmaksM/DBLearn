@@ -7,10 +7,7 @@ namespace BookLibrary
     {
         static void Main(string[] args)
         {
-            using (var dbContext = new AppContext())
-            {
-               
-            }
+            
         }
     }
 }
