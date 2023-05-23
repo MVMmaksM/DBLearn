@@ -16,7 +16,9 @@ namespace BookLibrary.Repositories
 
             using (var dbContext = new AppContext())
             {
-                user = dbContext.Users.FirstOrDefault(u => u.Id.Equals(Id));
+                user = dbContext.Users
+                    .FirstOrDefault(u => u.Id
+                    .Equals(Id));
             }
 
             return user;
@@ -69,7 +71,11 @@ namespace BookLibrary.Repositories
 
             using (var dbcontext = new AppContext())
             {
-                countBook = dbcontext.Users.Include(u=>u.Books).Where(u => u.Name.Equals(nameUser)).FirstOrDefault()?.Books.Count;
+                countBook = dbcontext.Users
+                    .Include(u=>u.Books)
+                    .Where(u => u.Name
+                    .Equals(nameUser))
+                    .FirstOrDefault()?.Books.Count;
             }
 
             return countBook;
