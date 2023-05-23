@@ -37,7 +37,7 @@ namespace BookLibrary.Repositories
         }
 
         public void Add(Book book)
-        {          
+        {
             using (var dbContext = new AppContext())
             {
                 dbContext.Books.Add(book);
@@ -75,20 +75,20 @@ namespace BookLibrary.Repositories
 
                 books = dbcontext.Books
                     .Where(b => b.GenreId
-                    .Equals(idGenre) && (b.Year>=lowYear&& b.Year<=highYear))
-                    .ToList();              
+                    .Equals(idGenre) && (b.Year >= lowYear && b.Year <= highYear))
+                    .ToList();
             }
 
             return books;
         }
 
-        public int GetCountByAuthor(string firstNameAuthor)
+        public int GetCountByAuthor(string lastNameAuthor)
         {
             int countBook = 0;
 
             using (var dbcontext = new AppContext())
             {
-                countBook = countBook = dbcontext.Books.Include(b => b.Author).Where(b => b.Author.FirstName.Equals(firstNameAuthor)).Count();
+                countBook = dbcontext.Books.Include(b => b.Author).Where(b => b.Author.LastName.Equals(lastNameAuthor)).Count();
             }
 
             return countBook;
@@ -100,28 +100,40 @@ namespace BookLibrary.Repositories
 
             using (var dbcontext = new AppContext())
             {
-                countBook = countBook = dbcontext.Books.Include(b => b.Genre).Where(b => b.Genre.Equals(genre)).Count();
+                var idGenre = dbcontext.Genres
+                    .FirstOrDefault(g => g.Name
+                    .Equals(genre))?.Id;
+
+                countBook = dbcontext.Books
+                    .Where(b => b.GenreId
+                    .Equals(idGenre))
+                    .Count();
             }
 
             return countBook;
         }
 
-        public bool IsEqualBook(string firstNameAuthor, string titleBook) 
+        public bool IsEqualBook(string lastNameAuthor, string titleBook)
         {
             bool isEqualBook = false;
 
             using (var dbcontext = new AppContext())
             {
-                isEqualBook = dbcontext.Books.Include(b => b.Author).Where(b => b.Author.FirstName.Equals(firstNameAuthor) && b.Title.Equals(titleBook)).Count()>0;
+                var idAuthor = dbcontext.Authors
+                    .FirstOrDefault(a => a.LastName
+                    .Equals(lastNameAuthor))?.Id;
+
+                isEqualBook = dbcontext.Books.Where(b => b.AuthorId.Equals(idAuthor) && b.Title.Equals(titleBook)).Count() > 0;
+                //isEqualBook = dbcontext.Books.Include(b => b.Author).Where(b => b.Author.LastName.Equals(lastNameAuthor) && b.Title.Equals(titleBook)).Count() > 0;
             }
 
             return isEqualBook;
         }
 
-        public Book GetMaxYearBook() 
+        public Book GetMaxYearBook()
         {
             Book book = new Book();
-           
+
             using (var dbcontext = new AppContext())
             {
                 var maxYear = dbcontext.Books.Max(b => b.Year);
@@ -131,7 +143,7 @@ namespace BookLibrary.Repositories
             return book;
         }
 
-        public List<Book> GetAllAscTitle() 
+        public List<Book> GetAllAscTitle()
         {
             List<Book> books = new List<Book>();
 

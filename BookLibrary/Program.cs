@@ -55,13 +55,17 @@ namespace BookLibrary
 
                 //bookRepository.UpdateYearById(4, 1956);
 
-                var books = bookRepository.GetBooks(1890, 2000, "Рассказы");
+                //var books = bookRepository.GetBooks(1890, 2000, "Рассказы");
 
-                foreach (var book in books)
-                {
-                    Console.WriteLine(book.Title);
-                }
+                //foreach (var book in books)
+                //{
+                //    Console.WriteLine(book.Title);
+                //}
 
+                //var res = bookRepository.GetCountByAuthor("Творгенин");
+                //var res = bookRepository.GetCountByGenre("Рассказы");
+
+                var isEqualBook = bookRepository.IsEqualBook("Птушкиtн", "Собака на соломе");
             }
         }
     }
