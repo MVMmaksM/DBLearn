@@ -14,7 +14,7 @@ namespace BookLibrary.Repositories
     {
         public Book GetById(int Id)
         {
-            Book book;
+            Book book = new Book();
 
             using (var dbContext = new AppContext())
             {
@@ -60,6 +60,7 @@ namespace BookLibrary.Repositories
             {
                 var bookUpdate = GetById(id);
                 bookUpdate.Year = yearUpdate;
+                dbContext.Update(bookUpdate);
                 dbContext.SaveChanges();
             }
         }
@@ -70,7 +71,12 @@ namespace BookLibrary.Repositories
 
             using (var dbcontext = new AppContext())
             {
-                books = dbcontext.Books.Include(b => b.Genre).Where(b => b.Genre.Name.Equals(genre) && (b.Year >= lowYear && b.Year <= highYear)).ToList();
+                var idGenre = dbcontext.Genres.FirstOrDefault(g => g.Name.Equals(genre)).Id;
+
+                books = dbcontext.Books
+                    .Where(b => b.GenreId
+                    .Equals(idGenre) && (b.Year>=lowYear&& b.Year<=highYear))
+                    .ToList();              
             }
 
             return books;

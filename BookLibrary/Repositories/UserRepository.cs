@@ -58,6 +58,7 @@ namespace BookLibrary.Repositories
             {
                 var userUpdate = GetById(id);
                 userUpdate.Name = nameUpdate;
+                dbContext.Update(userUpdate);
                 dbContext.SaveChanges();
             }
         }     
