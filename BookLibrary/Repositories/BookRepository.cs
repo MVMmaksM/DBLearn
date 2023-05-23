@@ -123,8 +123,7 @@ namespace BookLibrary.Repositories
                     .FirstOrDefault(a => a.LastName
                     .Equals(lastNameAuthor))?.Id;
 
-                isEqualBook = dbcontext.Books.Where(b => b.AuthorId.Equals(idAuthor) && b.Title.Equals(titleBook)).Count() > 0;
-                //isEqualBook = dbcontext.Books.Include(b => b.Author).Where(b => b.Author.LastName.Equals(lastNameAuthor) && b.Title.Equals(titleBook)).Count() > 0;
+                isEqualBook = dbcontext.Books.Where(b => b.AuthorId.Equals(idAuthor) && b.Title.Equals(titleBook)).Count() > 0;                
             }
 
             return isEqualBook;

@@ -65,7 +65,9 @@ namespace BookLibrary
                 //var res = bookRepository.GetCountByAuthor("Творгенин");
                 //var res = bookRepository.GetCountByGenre("Рассказы");
 
-                var isEqualBook = bookRepository.IsEqualBook("Птушкиtн", "Собака на соломе");
+                //var isEqualBook = bookRepository.IsEqualBook("Птушкиtн", "Собака на соломе");
+
+                var res = bookRepository.GetMaxYearBook();
             }
         }
     }
