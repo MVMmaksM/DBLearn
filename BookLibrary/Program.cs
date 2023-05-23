@@ -67,7 +67,9 @@ namespace BookLibrary
 
                 //var isEqualBook = bookRepository.IsEqualBook("Птушкиtн", "Собака на соломе");
 
-                var res = bookRepository.GetMaxYearBook();
+                //var res = bookRepository.GetMaxYearBook();
+
+                var resAsc = bookRepository.GetAll();
             }
         }
     }
